@@ -1,0 +1,65 @@
+Hints:
+------
+
+Get the cpu serial number (to buy the video codecs)...
+
+cat /proc/cpuinfo
+
+---
+
+Kernel and video info...
+
+uname -a
+vcgencmd version
+
+---
+
+Change password...
+
+sudo passwd pi
+sudo passwd root
+
+---
+
+Set date and time...
+
+date mmddHHMMyyyy
+
+mm = month
+dd = day
+HH = hour
+MM = minute
+yyyy = year 
+
+---
+
+Start a python script after power on...
+
+sudo crontab -e
+@reboot sh /home/pi/shell-script.sh > /home/pi/script-log 2>&1
+STRG+X => Y => ENTER
+
+sudo nano shell-script.sh
+#!/bin/sh
+cd /home/pi
+sudo python python-script.py
+STRG+X => Y => ENTER
+
+sudo reboot
+
+---
+
+~10 MB Ramdisk (fixed size!!!)...
+
+sudo nano /boot/cmdline.txt
+...first line... ramdisk=10240
+STRG+X => Y => ENTER
+sudo mkdir /media/ramdisk
+sudo chmod 755 /media/ramdisk
+sudo reboot
+
+sudo mke2fs -m 0 /dev/ram0 10240
+sudo mount /dev/ram0 /media/ramdisk
+sudo chown pi:pi /media/ramdisk
+
+---

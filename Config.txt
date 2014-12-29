@@ -1,0 +1,67 @@
+Config:
+-------
+
+On the first boot the tool "raspi-config" is started and it is time to do some settings (if necessary)...
+
+4 Internationalisation Options (Change (I1) Locale, (I2) Timezone and (I3) Keyboard)
+8 Advanced Options (Set (A3) Memory Split and (A4) SSH)
+1 Expand Filesystem (to use the whole space of the sd card)
+Finish => Reboot
+
+---
+
+If you like to use a static ip address...
+
+sudo nano /etc/network/interfaces
+#iface eth0 inet dhcp
+iface eth0 inet static
+  address 192.168.0.100 # your Raspberry Pi ip address
+  netmask 255.255.255.0 # for class c network
+  gateway 192.168.0.1   # your router ip address
+
+STRG+X => Y => ENTER
+
+Nameserver entries here...
+
+sudo nano /etc/resolv.conf
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+
+STRG+X => Y => ENTER
+sudo reboot
+
+---
+
+Time for an update...
+
+sudo apt-get update
+sudo apt-get upgrade
+
+Check also for latest firmware...
+
+sudo apt-get install rpi-update
+sudo rpi-update
+sudo reboot
+
+---
+
+If the SSH terminal negotiation is to slow...
+
+sudo nano /etc/ssh/sshd_config
+UseDNS no   # below first passage
+
+STRG+X => Y => ENTER
+/etc/init.d/ssh restart
+
+---
+
+Find a repo...
+
+apt-cache search repo
+sudo apt-get install repo
+
+and delete all (+ config)...
+
+sudo apt-get purge repo
+
+---
