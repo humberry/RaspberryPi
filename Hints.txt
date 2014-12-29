@@ -52,7 +52,7 @@ sudo reboot
 ~10 MB Ramdisk (fixed size!!!)...
 
 sudo nano /boot/cmdline.txt
-...first line... ramdisk=10240
+...at the end of the first line...rootwait ramdisk=10240
 STRG+X => Y => ENTER
 sudo mkdir /media/ramdisk
 sudo chmod 755 /media/ramdisk
