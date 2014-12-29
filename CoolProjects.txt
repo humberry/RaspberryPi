@@ -1,0 +1,13 @@
+Cool Projects:
+--------------
+
+Neopixels on Raspberry Pi (WS281x)
+OpenELEC Media Center
+Temperature (DS18B20)
+AirPrint or AirPlay Server
+3D Printserver
+Webserver
+Time-Lapse Photography
+Gaming (Minecraft, Arcade, ...)
+Weather Station
+...
