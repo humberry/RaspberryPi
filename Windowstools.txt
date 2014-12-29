@@ -1,0 +1,11 @@
+Windowstools:
+-------------
+
+SD Formatter 4.0 (format sd card even with partitions)
+HDD Raw Copy Tool 1.10 (write image on sd card and also make a compressed backup)
+PuTTY beta 0.63 (SSH Terminal)
+WinSCP 5.1.4 (SFTP Client)
+
+Favorite Image => Raspian => http://downloads.raspberrypi.org/raspbian_latest
+User: pi
+Password: raspberry
