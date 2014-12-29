@@ -65,3 +65,9 @@ and delete all (+ config)...
 sudo apt-get purge repo
 
 ---
+
+Shutdown...
+
+sudo shutdown -h 0
+
+---
