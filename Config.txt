@@ -1,7 +1,7 @@
 Config:
 -------
 
-On the first boot the tool "raspi-config" is started and it is time to do some settings (if necessary)...
+On the first boot the tool "raspi-config" starts and it is time to do some settings (if necessary)...
 
 4 Internationalisation Options (Change (I1) Locale, (I2) Timezone and (I3) Keyboard)
 8 Advanced Options (Set (A3) Memory Split and (A4) SSH)
@@ -16,7 +16,7 @@ sudo nano /etc/network/interfaces
 #iface eth0 inet dhcp
 iface eth0 inet static
   address 192.168.0.100 # your Raspberry Pi ip address
-  netmask 255.255.255.0 # for class c network
+  netmask 255.255.255.0 # class c network
   gateway 192.168.0.1   # your router ip address
 
 STRG+X => Y => ENTER
