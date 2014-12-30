@@ -12,6 +12,10 @@ Kernel and video info...
 uname -a
 vcgencmd version
 
+Temperature info...
+
+vcgencmd measure_temp
+
 ---
 
 Change password...
@@ -61,5 +65,27 @@ sudo reboot
 sudo mke2fs -m 0 /dev/ram0 10240
 sudo mount /dev/ram0 /media/ramdisk
 sudo chown pi:pi /media/ramdisk
+
+---
+
+Install the watchdog to get sure the Raspberry Pi will reboot if sth. went wrong.
+
+---
+
+If you log in via terminal you might want to use screen (start commands as a daemon)...
+
+screen -dmS session-name script.sh
+
+Show all sessions...
+
+screen -ls
+
+Open a session...
+
+screen -rS session-name
+
+Leave session...
+
+STRG+A, D
 
 ---
