@@ -1,0 +1,108 @@
+Here you find a good picture how to wire your sensor:
+http://kodi.wiki/view/Raspberry_Pi
+
+
+SSH-Connection (root / openelec)
+
+OpenELEC:~ # mount -o remount,rw /flash
+OpenELEC:~ # nano /flash/config.txt
+dtoverlay=lirc-rpi
+ctrl+x
+OpenELEC:~ # mount -o remount,ro /flash
+OpenELEC:~ # reboot
+
+
+OpenELEC:~ # dmesg | grep lirc_rpi
+[...] lirc_rpi: module is from the staging directory, the quality is unknown, you have been warned.
+[...] lirc_rpi: auto-detected active low receiver on GPIO pin 18
+[...] lirc_rpi lirc_rpi: lirc_dev: driver lirc_rpi registered at minor = 0
+[...] lirc_rpi: driver registered!
+
+OpenELEC:~ # nano /storage/.config/autostart.sh
+killall lircd
+/usr/sbin/lircd --driver=default --device=/dev/lirc0 --uinput /storage/.config/lircd.conf
+ctrl+x 
+OpenELEC:~ # reboot
+
+With the next command you should get a response while pressing a button at your remote control.
+
+OpenELEC:~ # mode2 -d /dev/lirc0
+space 2915266
+pulse 9069
+space 4440
+pulse 621
+...
+
+Next step is unnecessary if you have a suitable config file for your remote control. 
+Otherwise it will take some time to "learn" all the buttons. Follow the instructions...
+
+OpenELEC:~ # irrecord -H default -d /dev/lirc0 /storage/.config/lircd.conf
+OpenELEC:~ # reboot
+
+With the next command you should get a response while pressing a button at your remote control.
+
+OpenELEC:~ # irw
+0000000000000001 00 KEY_MUTE /storage/.config/lircd.conf
+0000000000000019 00 KEY_POWER /storage/.config/lircd.conf
+0000000000000002 00 KEY_1 /storage/.config/lircd.conf
+0000000000000003 00 KEY_2 /storage/.config/lircd.conf
+0000000000000004 00 KEY_3 /storage/.config/lircd.conf
+0000000000000005 00 KEY_4 /storage/.config/lircd.conf
+0000000000000006 00 KEY_5 /storage/.config/lircd.conf
+0000000000000007 00 KEY_6 /storage/.config/lircd.conf
+0000000000000008 00 KEY_7 /storage/.config/lircd.conf
+0000000000000009 00 KEY_8 /storage/.config/lircd.conf
+000000000000000a 00 KEY_9 /storage/.config/lircd.conf
+000000000000000b 00 KEY_0 /storage/.config/lircd.conf
+0000000000000018 00 KEY_ESC /storage/.config/lircd.conf
+000000000000000c 00 KEY_UP /storage/.config/lircd.conf
+000000000000000d 00 KEY_DOWN /storage/.config/lircd.conf
+000000000000000e 00 KEY_LEFT /storage/.config/lircd.conf
+000000000000000f 00 KEY_RIGHT /storage/.config/lircd.conf
+0000000000000010 00 KEY_OK /storage/.config/lircd.conf
+0000000000000010 00 KEY_OK /storage/.config/lircd.conf
+0000000000000011 00 KEY_CHANNELUP /storage/.config/lircd.conf
+0000000000000012 00 KEY_CHANNELDOWN /storage/.config/lircd.conf
+0000000000000013 00 KEY_VOLUMEUP /storage/.config/lircd.conf
+0000000000000014 00 KEY_VOLUMEDOWN /storage/.config/lircd.conf
+0000000000000015 00 KEY_PAUSE /storage/.config/lircd.conf
+0000000000000016 00 KEY_STOP /storage/.config/lircd.conf
+0000000000000017 00 KEY_RECORD /storage/.config/lircd.conf
+
+Now we need to map the commands. Please change the name of the remote device to your device name.
+
+OpenELEC:~ # nano /storage/.kodi/userdata/Lircmap.xml
+<lircmap>
+    <remote device="MyRemoteControl">
+        <left>KEY_LEFT</left>
+        <right>KEY_RIGHT</right>
+        <up>KEY_UP</up>
+        <down>KEY_DOWN</down>
+        <select>KEY_OK</select>
+        <play>KEY_PAUSE</play>
+        <pause>KEY_PAUSE</pause>
+        <stop>KEY_STOP</stop>
+        <volumeplus>KEY_VOLUMEUP</volumeplus>
+        <volumeminus>KEY_VOLUMEDOWN</volumeminus>
+        <mute>KEY_MUTE</mute>
+        <power>KEY_POWER</power>
+        <back>KEY_ESC</back>
+        <pageplus>KEY_CHANNELUP</pageplus>
+        <pageminus>KEY_CHANNELDOWN</pageminus>
+        <record>KEY_RECORD</record>
+        <zero>KEY_0</zero>
+        <one>KEY_1</one>
+        <two>KEY_2</two>
+        <three>KEY_3</three>
+        <four>KEY_4</four>
+        <five>KEY_5</five>
+        <six>KEY_6</six>
+        <seven>KEY_7</seven>
+        <eight>KEY_8</eight>
+        <nine>KEY_9</nine>
+    </remote>
+</lircmap>
+ctrl+x 
+OpenELEC:~ # reboot
+
+Have fun.
