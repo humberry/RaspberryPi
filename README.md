@@ -1,7 +1,7 @@
-Raspberry Pi<br/>
-============<br/>
-<br/>
-Config files, hints, etc. for the Raspberry Pi.<br/>
-<br/>
+Raspberry Pi
+============
+
+Config files, hints, etc. for the Raspberry Pi.
+
 
 
